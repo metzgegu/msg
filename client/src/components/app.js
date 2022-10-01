@@ -1,37 +1,37 @@
-import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
-import { io } from "socket.io-client";
-import Feed from "./feed";
+import { h } from 'preact'
+import { useState, useEffect } from 'preact/hooks'
+import { io } from 'socket.io-client'
+import Feed from './feed'
 
 const App = () => {
-  const [feeds, setFeeds] = useState([]);
-  const [message, setMessage] = useState("");
-  const [socket, setSocket] = useState();
+  const [feeds, setFeeds] = useState([])
+  const [message, setMessage] = useState('')
+  const [socket, setSocket] = useState()
 
   useEffect(() => {
-    const s = io("http://localhost:3000", {
-      transports: ["websocket", "polling", "flashsocket"],
-    });
-    setSocket(s);
-    console.log("mounted", socket);
-    s.on("connect", () => {
-      setFeeds((prevFriends) => [...prevFriends, "connected"]);
-    });
+    const s = io('http://localhost:3000', {
+      transports: ['websocket', 'polling', 'flashsocket'],
+    })
+    setSocket(s)
+    console.log('mounted', socket)
+    s.on('connect', () => {
+      setFeeds((prevFriends) => [...prevFriends, 'connected'])
+    })
 
-    s.on("dispatchMessage", (newMessage) => {
-      setFeeds((prevFriends) => [...prevFriends, newMessage]);
-    });
-  }, []);
+    s.on('dispatchMessage', (newMessage) => {
+      setFeeds((prevFriends) => [...prevFriends, newMessage])
+    })
+  }, [])
 
   useEffect(() => {
-    console.log("feeds updated", feeds);
-  }, [feeds]);
+    console.log('feeds updated', feeds)
+  }, [feeds])
 
   const sendMessage = (event) => {
-    event.preventDefault();
-    socket.emit("sendMessage", message);
-    setMessage("");
-  };
+    event.preventDefault()
+    socket.emit('sendMessage', message)
+    setMessage('')
+  }
 
   return (
     <div id="app">
@@ -47,7 +47,7 @@ const App = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

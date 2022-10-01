@@ -1,13 +1,9 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 const Feed = ({ feeds }) => {
-	const feedsUi = feeds?.map(feed => <li>{feed}</li>)
+  const feedsUi = feeds?.map((feed) => <li key={feed}>{feed}</li>);
 
-	return (
-		<ul>
-            {feedsUi}
-        </ul>
-	)
-}
+  return <ul>{feedsUi}</ul>;
+};
 
 export default Feed;

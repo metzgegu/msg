@@ -1,0 +1,22 @@
+.chat {
+  position: relative;
+  height: 100%;
+  background: #fefae0;
+  padding: 0rem 1rem 1rem 1rem;
+  border-radius: 1rem;
+}
+
+.form {
+  position: absolute;
+  bottom: 0;
+  bottom: 1rem;
+  width: calc(100% - 1rem);
+}
+
+.messageInput {
+  width: calc(100% - 1rem);
+}
+
+.title {
+  text-align: center;
+}

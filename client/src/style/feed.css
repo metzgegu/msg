@@ -1,0 +1,11 @@
+.list {
+  list-style-type: disclosure-closed;
+  max-height: calc(100% - 170px);
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+}
+
+.list > .item:last-child {
+  scroll-snap-align: end;
+}

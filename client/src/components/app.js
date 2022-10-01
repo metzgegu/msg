@@ -2,6 +2,7 @@ import { h } from 'preact'
 import { useState, useEffect } from 'preact/hooks'
 import { io } from 'socket.io-client'
 import Feed from './feed'
+import('../style/app.css')
 
 const App = () => {
   const [feeds, setFeeds] = useState([])
@@ -24,23 +25,33 @@ const App = () => {
 
   const sendMessage = (event) => {
     event.preventDefault()
-    socket.emit('sendMessage', message)
+    const newMessage = event.target[0].value
+
+    if (!newMessage || newMessage === '') {
+      return
+    }
+
+    socket.emit('sendMessage', newMessage)
     setMessage('')
   }
 
   return (
     <div id="app">
-      <Feed feeds={feeds} />
-      <form onSubmit={sendMessage}>
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button type="submit" value="Submit">
-          Send
-        </button>
-      </form>
+      <div class="chat">
+        <h1 class="title">msg.</h1>
+        <Feed feeds={feeds} />
+        <form class="form" onSubmit={sendMessage}>
+          <input
+            class="messageInput"
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button type="submit" value="Submit">
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

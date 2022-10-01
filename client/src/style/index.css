@@ -1,13 +1,17 @@
 html,
 body {
-  background: #fafafa;
+  background: #ccd5ae;
   font-family: 'Helvetica Neue', arial, sans-serif;
   font-weight: 400;
   color: #444;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: calc(100% - 16px);
+  margin: 0;
+}
+
+html {
   max-width: 70ch;
-  padding: 3em 1em;
   margin: auto;
   line-height: 1.75;
   font-size: 1.25em;

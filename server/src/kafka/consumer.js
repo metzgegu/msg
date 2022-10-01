@@ -1,6 +1,6 @@
 const kafka = require('./kafka')
 
-const topic = 'message'
+const topic = process.env.KAFKA_TOPIC
 const consumer = kafka.consumer({ groupId: 'messageConsumer' })
 
 const consume = async (callbackEachMessage) => {

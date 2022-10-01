@@ -1,10 +1,8 @@
 const { Kafka } = require('kafkajs')
 
-const host = process.env.HOST_IP
-
 const kafka = new Kafka({
   clientId: 'msg',
-  brokers: [`${host}:9092`],
+  brokers: [process.env.KAFKA_BROKER_URL],
 })
 
 module.exports = kafka

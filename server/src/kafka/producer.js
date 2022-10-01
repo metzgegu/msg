@@ -1,7 +1,7 @@
 const kafka = require('./kafka')
 
 const producer = kafka.producer()
-const topic = 'message'
+const topic = process.env.KAFKA_TOPIC
 
 const connect = async () => {
   await producer.connect()

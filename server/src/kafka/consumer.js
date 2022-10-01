@@ -11,4 +11,4 @@ const consume = async (callbackEachMessage) => {
   })
 }
 
-module.exports = consume
+module.exports = { consume }

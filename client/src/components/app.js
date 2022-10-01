@@ -13,7 +13,6 @@ const App = () => {
       transports: ['websocket', 'polling', 'flashsocket'],
     })
     setSocket(s)
-    console.log('mounted', socket)
     s.on('connect', () => {
       setFeeds((prevFriends) => [...prevFriends, 'connected'])
     })
@@ -22,10 +21,6 @@ const App = () => {
       setFeeds((prevFriends) => [...prevFriends, newMessage])
     })
   }, [])
-
-  useEffect(() => {
-    console.log('feeds updated', feeds)
-  }, [feeds])
 
   const sendMessage = (event) => {
     event.preventDefault()

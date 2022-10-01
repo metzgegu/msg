@@ -1,5 +1,21 @@
 version: '2'
 services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: msg_webserver_image
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/application
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_URL: kafka:9092
   zookeeper:
     image: wurstmeister/zookeeper:latest
     ports:
@@ -16,5 +32,13 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_DELETE_TOPIC_ENABLE: 'true'
       KAFKA_CREATE_TOPICS: 'message:1:1'
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      ALLOW_PLAINTEXT_LISTENER: 'true'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "kafka-topics.sh", "--list", "--zookeeper", "zookeeper:2181"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
